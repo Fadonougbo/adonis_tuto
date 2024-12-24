@@ -1,0 +1,47 @@
+
+@admin.base({title:"property-admin"}) 
+
+    @slot("assets")
+        @vite(["resources/css/admin/index.css"])
+    @end
+
+    @slot("content")
+
+    <main>
+        @flashMessage("success")
+            <p>{{$message}}</p>
+        @end
+        <h1>Les biens</h1>
+
+        <nav>
+            <a href="{{route("admin.property.create")}}" >Ajouter un nouveau produit</a>
+        </nav>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Titre</th>
+                    <th>Surface</th>
+                    <th>Prix</th>
+                    <th>Ville</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @each(property in properties)
+                @let({title,surface,price,city}=property)
+                    <tr>
+                        <td>{{title}}</td>
+                        <td>{{surface}}</td>
+                        <td>{{price}}</td>
+                        <td>{{city}}</td>
+                        <td></td>
+                    </tr>
+                @end
+            </tbody>
+        </table>
+    </main>
+        
+    @end
+
+@end

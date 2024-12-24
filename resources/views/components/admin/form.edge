@@ -1,0 +1,74 @@
+<div>
+    <h1>Create New Property</h1>
+
+    <form action="" method="POST">
+        {{csrfField()}}
+
+      
+        @error("E_VALIDATION_ERROR")
+            <div>
+                <h2>Une erreur est survenu veuillez vérifier vos données</h2>
+            </div> 
+        @end
+
+        <div>
+            <label for="title">Titre</label>
+            <input type="text" name="title" id="title" value="{{old('title')??''}}">
+            @inputError("title")
+             <p>{{$messages}}</p>
+            @end
+        </div>
+
+        <div>
+            <label for="surface">Surface</label>
+            <input type="number" name="surface" id="surface" value="{{old('surface')??''}}">
+            @inputError("surface")
+            <p>{{$messages}}</p>
+            @end
+        </div>
+
+        <div>
+            <label for="rooms">Nb chambre</label>
+            <input type="number" name="rooms" id="rooms" value="{{old('rooms')??''}}">
+            @inputError("rooms")
+            <p>{{$messages}}</p>
+            @end
+        </div>
+
+        <div>
+            <label for="price">Prix</label>
+            <input type="number" name="price" id="price" value="{{old('price')}}">
+            @inputError("price")
+            <p>{{$messages}}</p>
+            @end
+        </div>
+
+        <div>
+            <label for="city">Ville</label>
+            <input type="text" name="city" id="city" value="{{old('city')??''}}">
+            @inputError("city")
+            <p>{{$messages}}</p>
+            @end
+        </div>
+
+        <div>
+            <label for="tel">Tel</label>
+            <input type="tel" name="tel" id="tel" value="{{old('tel')??''}}">
+            @inputError("tel")
+            <p>{{$messages}}</p>
+            @end
+        </div>
+
+        <div>
+            <label for="description">Description</label>
+            <textarea name="description" id="description">{{old('description')??''}}</textarea>
+            @inputError("description")
+            <p>{{$messages}}</p>
+            @end
+        </div>
+
+        <section>
+            <button>Create</button>
+        </section>
+    </form>
+</div>
