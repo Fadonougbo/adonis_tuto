@@ -1,69 +1,84 @@
-<div>
-    <h1>Create New Property</h1>
+
+
+<div id="form_container" >
 
     <form action="" method="POST">
         {{csrfField()}}
 
       
         @error("E_VALIDATION_ERROR")
-            <div>
+            <div id="message" >
                 <h2>Une erreur est survenu veuillez vérifier vos données</h2>
             </div> 
         @end
 
         <div>
-            <label for="title">Titre</label>
+            <span><label for="title">Titre</label></span>
             <input type="text" name="title" id="title" value="{{old('title')??''}}">
             @inputError("title")
-             <p>{{$messages}}</p>
+             <p>
+               <span> {{$messages}} </span>
+            </p>
             @end
         </div>
 
         <div>
-            <label for="surface">Surface</label>
+            <span><label for="surface">Surface</label></span>
             <input type="number" name="surface" id="surface" value="{{old('surface')??''}}">
             @inputError("surface")
-            <p>{{$messages}}</p>
+            <p>
+               <span> {{$messages}} </span>
+            </p>
             @end
         </div>
 
         <div>
-            <label for="rooms">Nb chambre</label>
+            <span><label for="rooms">Nb chambre</label></span>
             <input type="number" name="rooms" id="rooms" value="{{old('rooms')??''}}">
             @inputError("rooms")
-            <p>{{$messages}}</p>
+            <p>
+               <span> {{$messages}} </span>
+            </p>
             @end
         </div>
 
         <div>
-            <label for="price">Prix</label>
+            <span><label for="price">Prix</label></span>
             <input type="number" name="price" id="price" value="{{old('price')}}">
             @inputError("price")
-            <p>{{$messages}}</p>
+            <p>
+               <span> {{$messages}} </span>
+            </p>
             @end
         </div>
 
         <div>
-            <label for="city">Ville</label>
+            <span><label for="city">Ville</label></span>
             <input type="text" name="city" id="city" value="{{old('city')??''}}">
             @inputError("city")
-            <p>{{$messages}}</p>
+            <p>
+               <span> {{$messages}} </span>
+            </p>
             @end
         </div>
 
         <div>
-            <label for="tel">Tel</label>
+            <span><label for="tel">Tel</label></span>
             <input type="tel" name="tel" id="tel" value="{{old('tel')??''}}">
             @inputError("tel")
-            <p>{{$messages}}</p>
+            <p>
+               <span> {{$messages}} </span>
+            </p>
             @end
         </div>
 
         <div>
-            <label for="description">Description</label>
+            <span><label for="description">Description</label></span>
             <textarea name="description" id="description">{{old('description')??''}}</textarea>
             @inputError("description")
-            <p>{{$messages}}</p>
+            <p>
+               <span> {{$messages}} </span>
+            </p>
             @end
         </div>
 

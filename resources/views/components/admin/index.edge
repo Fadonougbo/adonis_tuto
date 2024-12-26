@@ -9,8 +9,9 @@
 
     <main>
         @flashMessage("success")
-            <p>{{$message}}</p>
+            <p id="message_success" >{{$message}}</p>
         @end
+
         <h1>Les biens</h1>
 
         <nav>
@@ -32,7 +33,7 @@
                 @let({title,surface,price,city}=property)
                     <tr>
                         <td>{{title}}</td>
-                        <td>{{surface}}</td>
+                        <td>{{surface}} m<sup>2</sup></td>
                         <td>{{price}}</td>
                         <td>{{city}}</td>
                         <td></td>

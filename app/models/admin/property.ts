@@ -20,14 +20,14 @@ export default class Property extends BaseModel {
 	@column()
 	declare price: number;
 
-  @column()
-  declare city:string
+	@column()
+	declare city:string
 
-  @column()
-  declare isSold:boolean
+	@column()
+	declare isSold:boolean
 
-  @column()
-  declare tel:string
+	@column()
+	declare tel:string
 
 	@column.dateTime({ autoCreate: true })
 	declare createdAt: DateTime;

@@ -1,0 +1,82 @@
+
+
+#page_title {
+
+    text-align: center;
+    text-transform: capitalize;
+    margin-block: 1rem;
+}
+
+#form_container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    form {
+        width:80%;
+        display: flex;
+        flex-direction: column;
+      
+    }
+
+    #message {
+        display: flex;
+        justify-content: center;
+        margin: 0.6rem 0;
+     
+    }
+
+    #message  h2 {
+        background: tomato;
+        padding: 0.4rem;
+
+    }
+
+    form :is(input,textarea) {
+        width: 60%;
+        padding: 0.7rem;
+    }
+
+    form div {
+        width: 100%;
+    }
+
+    form div :is(span,p) {
+        width: 60%;
+        text-align: start;
+        margin: 0.3rem 0;
+    }
+
+    form div p {
+        color: tomato;
+    }
+
+    form div:has(label) {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin:0.3rem 0;
+    }
+
+    form section:has(button) {
+        
+    }
+
+    form section {
+        display: flex;
+        justify-content: center;
+        margin:0.4rem 0
+    }
+
+    form button {
+        padding: 0.5rem;
+        border: none;
+        width:30%;
+        font-size: 1.3rem;
+        background: chartreuse;
+        opacity: 0.9;
+
+        &:hover {
+            opacity: 1;
+        }
+    }
+}

@@ -2,8 +2,13 @@
 
 @admin.base({title:"Create property"}) 
 
+    @slot("assets")
+        @vite(['resources/css/admin/create.css'])
+    @end
+
     @slot("content")
-    
+        <h1 id="page_title" >Create New Property</h1>
+
         @!admin.form()
 
     @end
