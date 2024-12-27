@@ -2,10 +2,12 @@
 
 <div id="form_container" >
 
-    <form action="" method="POST">
+    <form action="{{
+        property.id?route('admin.property.edit',{property:property.id}, { qs: {_method:'patch'} }):''
+    }}" method="POST">
+    
         {{csrfField()}}
 
-      
         @error("E_VALIDATION_ERROR")
             <div id="message" >
                 <h2>Une erreur est survenu veuillez vérifier vos données</h2>
@@ -14,17 +16,17 @@
 
         <div>
             <span><label for="title">Titre</label></span>
-            <input type="text" name="title" id="title" value="{{old('title')??''}}">
+            <input type="text" name="title" id="title" value="{{old('title',property.title)||' '}}">
             @inputError("title")
              <p>
                <span> {{$messages}} </span>
             </p>
             @end
         </div>
-
+       
         <div>
             <span><label for="surface">Surface</label></span>
-            <input type="number" name="surface" id="surface" value="{{old('surface')??''}}">
+            <input type="number" name="surface" id="surface" value="{{old('surface',property.surface)}}">
             @inputError("surface")
             <p>
                <span> {{$messages}} </span>
@@ -34,7 +36,7 @@
 
         <div>
             <span><label for="rooms">Nb chambre</label></span>
-            <input type="number" name="rooms" id="rooms" value="{{old('rooms')??''}}">
+            <input type="number" name="rooms" id="rooms" value="{{old('rooms',property.rooms)}}">
             @inputError("rooms")
             <p>
                <span> {{$messages}} </span>
@@ -44,7 +46,7 @@
 
         <div>
             <span><label for="price">Prix</label></span>
-            <input type="number" name="price" id="price" value="{{old('price')}}">
+            <input type="number" name="price" id="price" value="{{old('price',property.price)}}">
             @inputError("price")
             <p>
                <span> {{$messages}} </span>
@@ -54,7 +56,7 @@
 
         <div>
             <span><label for="city">Ville</label></span>
-            <input type="text" name="city" id="city" value="{{old('city')??''}}">
+            <input type="text" name="city" id="city" value="{{old('city',property.city)}}">
             @inputError("city")
             <p>
                <span> {{$messages}} </span>
@@ -64,7 +66,7 @@
 
         <div>
             <span><label for="tel">Tel</label></span>
-            <input type="tel" name="tel" id="tel" value="{{old('tel')??''}}">
+            <input type="tel" name="tel" id="tel" value="{{old('tel',property.tel)}}">
             @inputError("tel")
             <p>
                <span> {{$messages}} </span>
@@ -74,8 +76,20 @@
 
         <div>
             <span><label for="description">Description</label></span>
-            <textarea name="description" id="description">{{old('description')??''}}</textarea>
+            <textarea name="description" id="description" minlength="100">{{old('description',property.description)}}</textarea>
             @inputError("description")
+            <p>
+               <span> {{$messages}} </span>
+            </p>
+            @end
+        </div>
+
+        <div>
+            <span><label for="is_sold">Sold ?</label></span>
+
+            <input type="checkbox" name="is_sold" id="isSold" value="1" {{old('is_sold',property.is_sold)?'checked':''}} >
+            
+            @inputError("is_sold")
             <p>
                <span> {{$messages}} </span>
             </p>

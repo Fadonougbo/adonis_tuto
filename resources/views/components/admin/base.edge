@@ -13,6 +13,13 @@
 </head>
 <body>
 
+    <header>
+        <ul>
+            <li>
+                <a href="{{route('admin.index')}}">Dashboard</a>
+            </li>
+        </ul>
+    </header>
     @if($slots.content) 
 
     {{{await $slots.content()}}}

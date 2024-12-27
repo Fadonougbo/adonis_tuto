@@ -20,6 +20,9 @@ importers:
       '@adonisjs/lucid':
         specifier: ^21.3.0
         version: 21.4.0(@adonisjs/assembler@7.8.2(typescript@5.6.3))(@adonisjs/core@6.15.2(@adonisjs/assembler@7.8.2(typescript@5.6.3))(@vinejs/vine@2.1.0)(edge.js@6.2.0))(luxon@3.5.0)(pg@8.13.1)
+      '@adonisjs/route-model-binding':
+        specifier: 2.0.0-0
+        version: 2.0.0-0(@adonisjs/core@6.15.2(@adonisjs/assembler@7.8.2(typescript@5.6.3))(@vinejs/vine@2.1.0)(edge.js@6.2.0))(@adonisjs/lucid@21.4.0(@adonisjs/assembler@7.8.2(typescript@5.6.3))(@adonisjs/core@6.15.2(@adonisjs/assembler@7.8.2(typescript@5.6.3))(@vinejs/vine@2.1.0)(edge.js@6.2.0))(luxon@3.5.0)(pg@8.13.1))
       '@adonisjs/session':
         specifier: ^7.5.0
         version: 7.5.0(@adonisjs/core@6.15.2(@adonisjs/assembler@7.8.2(typescript@5.6.3))(@vinejs/vine@2.1.0)(edge.js@6.2.0))(edge.js@6.2.0)
@@ -262,6 +265,13 @@ packages:
   '@adonisjs/repl@4.0.1':
     resolution: {integrity: sha512-fgDRC5I8RBKHzsJPM4rRQF/OWI0K9cNihCIf4yHdqQt3mhFqWSOUjSi4sXWykdICLiddmyBO86au7i0d0dj5vQ==}
     engines: {node: '>=18.16.0'}
+
+  '@adonisjs/route-model-binding@2.0.0-0':
+    resolution: {integrity: sha512-QF2SjoAEMF+sElCc7JyJUvd7btZZp+ChSPzDG0RBtrvHomuLi2JkRSrTfnG6op+Tw068nX9ZxCOjIk++jrPTIg==}
+    engines: {node: '>=20.11.1'}
+    peerDependencies:
+      '@adonisjs/core': ^6.9.0
+      '@adonisjs/lucid': ^20.5.1
 
   '@adonisjs/session@7.5.0':
     resolution: {integrity: sha512-H5fFrkE/yFSWP/XD8eyWLyUVbtIqTcw9QBP1me4d9vnl4mao4jHrmnNA8rwtzsEFdXu/UgWdH4kljh1G9PDzWw==}
@@ -3601,6 +3611,13 @@ snapshots:
     dependencies:
       '@poppinss/colors': 4.1.3
       string-width: 7.2.0
+
+  '@adonisjs/route-model-binding@2.0.0-0(@adonisjs/core@6.15.2(@adonisjs/assembler@7.8.2(typescript@5.6.3))(@vinejs/vine@2.1.0)(edge.js@6.2.0))(@adonisjs/lucid@21.4.0(@adonisjs/assembler@7.8.2(typescript@5.6.3))(@adonisjs/core@6.15.2(@adonisjs/assembler@7.8.2(typescript@5.6.3))(@vinejs/vine@2.1.0)(edge.js@6.2.0))(luxon@3.5.0)(pg@8.13.1))':
+    dependencies:
+      '@adonisjs/core': 6.15.2(@adonisjs/assembler@7.8.2(typescript@5.6.3))(@vinejs/vine@2.1.0)(edge.js@6.2.0)
+      '@adonisjs/fold': 10.1.3
+      '@adonisjs/lucid': 21.4.0(@adonisjs/assembler@7.8.2(typescript@5.6.3))(@adonisjs/core@6.15.2(@adonisjs/assembler@7.8.2(typescript@5.6.3))(@vinejs/vine@2.1.0)(edge.js@6.2.0))(luxon@3.5.0)(pg@8.13.1)
+      '@poppinss/utils': 6.8.3
 
   '@adonisjs/session@7.5.0(@adonisjs/core@6.15.2(@adonisjs/assembler@7.8.2(typescript@5.6.3))(@vinejs/vine@2.1.0)(edge.js@6.2.0))(edge.js@6.2.0)':
     dependencies:

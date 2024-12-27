@@ -1,16 +1,21 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import { dd } from '@adonisjs/core/services/dumper';
+import { bind } from '@adonisjs/route-model-binding';
 import Property from '#models/admin/property';
-import { createPropertyFormValidator } from '#validators/admin/property_form';
+import { createPropertyFormValidator, updatePropertyFormValidator } from '#validators/admin/property_form';
 
 export default class PropertiesController {
   
   /**
    * Display a list of resource
    */
-  async index({view}: HttpContext) {
+  async index({view,request}: HttpContext) {
 
-    const properties=await Property.all()
+    const currentPage=request.input("page",1)
+
+    const url=request.url()
+
+    const properties= ( (await Property.query().orderBy("id","desc").paginate(currentPage,12)).baseUrl(url) )
 
     return view.render("components/admin/index",{properties})
   }
@@ -20,7 +25,8 @@ export default class PropertiesController {
    */
   async create({view}: HttpContext) {
 
-    return view.render("components/admin/create");
+    const property=new Property()
+    return view.render("components/admin/create",{property});
   }
 
   /**
@@ -41,12 +47,26 @@ export default class PropertiesController {
   /**
    * Show individual record
    */
-  async show({ params }: HttpContext) {}
+  @bind()
+  async show({ view}: HttpContext,property:Property) {
+    
+    return view.render("components/admin/create",{property});
+  }
 
   /**
    * Edit individual record
    */
-  async edit({ params }: HttpContext) {}
+  @bind()
+  async edit({ request,session,response }: HttpContext,property:Property) {
+   
+    const data=await request.validateUsing(updatePropertyFormValidator)
+    
+    await property.merge({...data,is_sold:data.is_sold?true:false }).save()
+
+    session.flash("success","Element modifié avec success")
+
+    return response.redirect().toRoute("admin.index");
+  }
 
   /**
    * Handle form submission for the edit action
@@ -56,5 +76,14 @@ export default class PropertiesController {
   /**
    * Delete record
    */
-  async destroy({ params }: HttpContext) {}
+  @bind()
+  async destroy({ session,response }: HttpContext,property:Property) {
+
+    await property.delete()
+
+    session.flash("success","Element supprimé avec success")
+
+    return response.redirect().toRoute("admin.index");
+
+  }
 }

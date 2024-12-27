@@ -12,7 +12,7 @@ export const createPropertyFormValidator = vine.compile(
     rooms:vine.number(),
     price:vine.number().min(3),
     city:vine.string(),
-    isSold:vine.boolean().optional(),
+    is_sold:vine.boolean().optional(),
     tel:vine.string()
   }).bail(true)
 )
@@ -22,5 +22,14 @@ export const createPropertyFormValidator = vine.compile(
  * an existing property form.
  */
 export const updatePropertyFormValidator = vine.compile(
-  vine.object({})
+  vine.object({
+    title:vine.string().minLength(4),
+    description:vine.string(),
+    surface:vine.number(),
+    rooms:vine.number(),
+    price:vine.number().min(3),
+    city:vine.string(),
+    is_sold:vine.boolean().optional(),
+    tel:vine.string()
+  }).bail(true)
 )

@@ -1,7 +1,9 @@
-import { BaseModel, column } from "@adonisjs/lucid/orm";
+import { BaseModel, CamelCaseNamingStrategy, column } from "@adonisjs/lucid/orm";
 import type { DateTime } from "luxon";
 
 export default class Property extends BaseModel {
+
+
 	@column({ isPrimary: true })
 	declare id: number;
 
@@ -23,8 +25,8 @@ export default class Property extends BaseModel {
 	@column()
 	declare city:string
 
-	@column()
-	declare isSold:boolean
+	@column({columnName:'isSold'})
+	declare is_sold:boolean
 
 	@column()
 	declare tel:string

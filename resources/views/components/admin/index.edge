@@ -21,26 +21,55 @@
         <table>
             <thead>
                 <tr>
+                    <th>#</th>
                     <th>Titre</th>
                     <th>Surface</th>
                     <th>Prix</th>
                     <th>Ville</th>
+                    <th>Sold ?</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
                 @each(property in properties)
-                @let({title,surface,price,city}=property)
+
+                @let({title,surface,price,city,id,is_sold}=property)
+
                     <tr>
+                        <td>{{id}}</td>
                         <td>{{title}}</td>
                         <td>{{surface}} m<sup>2</sup></td>
                         <td>{{price}}</td>
                         <td>{{city}}</td>
-                        <td></td>
+                        <td>{{is_sold?'ok':'no'}}</td>
+                        <td>
+                            <a href="{{route('admin.property.show',{property:id})}}">Éditer</a>
+                            <form action="{{ route('admin.property.destroy',{property:id},{qs:{_method:'DELETE'}} ) }}" method="POST">
+                                {{csrfField()}}
+                                <button>Supprimer</button>
+                            </form>
+                        </td>
                     </tr>
+
                 @end
+
             </tbody>
         </table>
+        <div>
+
+            @if(properties.currentPage!==1) 
+
+            <a href="{{properties.getPreviousPageUrl()}}">previous</a>
+            
+            @end
+
+            @if(properties.hasMorePages) 
+
+            <a href="{{properties.getNextPageUrl()}}">next</a>
+
+            @end
+
+        </div>
     </main>
         
     @end
