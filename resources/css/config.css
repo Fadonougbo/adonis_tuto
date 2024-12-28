@@ -8,3 +8,25 @@
 a {
     text-decoration: none;
 }
+
+header {
+    background-color: gray;
+    padding: 0.7rem;
+   
+    ul {
+        display: flex;
+    }
+
+    ul li {
+        margin-inline: 0.2rem;
+    }
+
+    a {
+        color:#fff;
+        padding: 0.4rem;
+        background: #242323;
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+}

@@ -16,10 +16,15 @@
     <header>
         <ul>
             <li>
-                <a href="{{route('admin.index')}}">Dashboard</a>
+                <a href="{{route('admin.index')}}">Dashboard-Biens</a>
+            </li>
+
+            <li>
+                <a href="{{route('admin.option.index')}}">Dashboard-Options</a>
             </li>
         </ul>
     </header>
+    
     @if($slots.content) 
 
     {{{await $slots.content()}}}

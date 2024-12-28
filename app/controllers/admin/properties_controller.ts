@@ -47,18 +47,28 @@ export default class PropertiesController {
   /**
    * Show individual record
    */
-  @bind()
-  async show({ view}: HttpContext,property:Property) {
+  async show() {
     
-    return view.render("components/admin/create",{property});
+   
   }
 
   /**
    * Edit individual record
    */
   @bind()
-  async edit({ request,session,response }: HttpContext,property:Property) {
+  async edit({ view}: HttpContext,property:Property) {
+
+    return view.render("components/admin/create",{property});
    
+    
+  }
+
+  /**
+   * Handle form submission for the edit action
+   */
+  @bind()
+  async update({ request,session,response }: HttpContext,property:Property) {
+
     const data=await request.validateUsing(updatePropertyFormValidator)
     
     await property.merge({...data,is_sold:data.is_sold?true:false }).save()
@@ -67,11 +77,6 @@ export default class PropertiesController {
 
     return response.redirect().toRoute("admin.index");
   }
-
-  /**
-   * Handle form submission for the edit action
-   */
-  async update({ params, request }: HttpContext) {}
 
   /**
    * Delete record

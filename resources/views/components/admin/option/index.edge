@@ -1,0 +1,69 @@
+
+@admin.base({title:"option-admin"}) 
+
+    @slot("assets")
+        @vite(["resources/css/admin/index.css"])
+    @end
+
+    @slot("content")
+
+    <main>
+        @flashMessage("success")
+            <p id="message_success" >{{$message}}</p>
+        @end
+
+        <h1>Les options</h1>
+
+        <nav>
+            <a href="{{route("admin.option.create")}}" >Ajouter une nouvelle Option</a>
+        </nav>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nom</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @each(option in options)
+
+                @let({city,id,name}=option)
+
+                    <tr>
+                        <td>{{id}}</td>
+                        <td>{{name}}</td>
+                        <td class="actions" >
+                            <a href="{{route('admin.option.edit',{option:id})}}">Éditer</a>
+                            <form action="{{ route('admin.option.destroy',{option:id},{qs:{_method:'DELETE'}} ) }}" method="POST">
+                                {{csrfField()}}
+                                <button>Supprimer</button>
+                            </form>
+                        </td>
+                    </tr>
+
+                @end
+
+            </tbody>
+        </table>
+        <div>
+
+            @if(options.currentPage!==1) 
+
+            <a href="{{options.getPreviousPageUrl()}}">previous</a>
+            
+            @end
+
+            @if(options.hasMorePages) 
+
+            <a href="{{options.getNextPageUrl()}}">next</a>
+
+            @end
+
+        </div>
+    </main>
+        
+    @end
+
+@end

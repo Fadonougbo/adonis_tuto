@@ -1,0 +1,19 @@
+
+
+@admin.base({title:"Create option"}) 
+
+    @slot("assets")
+        @vite(['resources/css/admin/create.css'])
+    @end
+
+    @slot("content")
+    
+
+        <h1 id="page_title" >{{option.id?"Update Option":"Create New Option"}} </h1>
+       
+        @!admin.option.form({option}) 
+            
+
+    @end
+
+@end

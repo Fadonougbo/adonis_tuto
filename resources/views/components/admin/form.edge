@@ -3,7 +3,7 @@
 <div id="form_container" >
 
     <form action="{{
-        property.id?route('admin.property.edit',{property:property.id}, { qs: {_method:'patch'} }):''
+        property.id?route('admin.property.update',{property:property.id}, { qs: {_method:'patch'} }):''
     }}" method="POST">
     
         {{csrfField()}}
@@ -84,20 +84,23 @@
             @end
         </div>
 
-        <div>
-            <span><label for="is_sold">Sold ?</label></span>
+        <section id="sold_checkbox_parent" >
 
-            <input type="checkbox" name="is_sold" id="isSold" value="1" {{old('is_sold',property.is_sold)?'checked':''}} >
-            
-            @inputError("is_sold")
-            <p>
-               <span> {{$messages}} </span>
-            </p>
-            @end
-        </div>
+            <section>
+                <label for="is_sold">Sold ?</label>
+                <input type="checkbox" name="is_sold" id="is_sold" value="1" {{old('is_sold',property.is_sold)?'checked':''}} >
+                
+                @inputError("is_sold")
+                <p>
+                   <span> {{$messages}} </span>
+                </p>
+                @end
+            </section>
 
-        <section>
-            <button>Create</button>
+        </section>
+
+        <section id="button_parent" >
+            <button>{{property.id?"Update":"create"}}</button>
         </section>
     </form>
 </div>
