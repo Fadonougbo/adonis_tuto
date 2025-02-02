@@ -19,6 +19,7 @@ header {
 
     ul li {
         margin-inline: 0.2rem;
+        list-style: none;
     }
 
     a {
