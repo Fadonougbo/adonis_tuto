@@ -1,3 +1,4 @@
+import stringHelpers from "@adonisjs/core/helpers/string";
 import { BaseModel, CamelCaseNamingStrategy, column, manyToMany } from "@adonisjs/lucid/orm";
 import type { ManyToMany } from "@adonisjs/lucid/types/relations";
 import type { DateTime } from "luxon";
@@ -41,4 +42,9 @@ export default class Property extends BaseModel {
 
 	@column.dateTime({ autoCreate: true, autoUpdate: true })
 	declare updatedAt: DateTime;
+
+	public getSlug():string {
+		
+		return stringHelpers.slug(this.title)
+	}
 }

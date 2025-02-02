@@ -1,0 +1,30 @@
+h1 {
+    margin-block:0.7rem;
+    font-size: 2.5rem;
+    text-align: center;
+    text-decoration: underline;
+    text-underline-offset: 0.4rem;
+}
+
+#cards {
+    display: flex; 
+    flex-wrap: wrap;
+    margin-block: 0.3rem;
+    padding: 0.5rem;
+
+    ul {
+       border: solid 0.1rem gray;
+       margin-inline: 0.2rem;
+       padding: 0.5rem;
+       margin-block: 0.3rem;
+    }
+
+    ul li:nth-child(1) {
+        font-size: 1.5rem;
+    }
+
+    ul li {
+        list-style: none;
+        margin-block: 0.2rem;
+    }
+}

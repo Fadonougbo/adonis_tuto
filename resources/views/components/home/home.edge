@@ -12,5 +12,20 @@
        </div>
 
        <h2>Nos derniers biens</h2>
+
+       <div id="cards">
+
+        @each(property in properties)
+            @!home.card({property}) 
+        @end
+
+       </div>
+
+       <div>
+            <a href="{{route('listings')}}" id="show_listings">
+                <mark>Voir tous les biens</mark>
+            </a>
+       </div>
+
     @end
 @end

@@ -1,0 +1,54 @@
+
+@home.base({title:'Listing des biens'}) 
+
+    @slot('assets')
+        @vite(['resources/css/listing/listing.css'])
+    @end
+    
+    @slot('content')
+
+    <h1>Tous les biens</h1>
+
+    @error('E_VALIDATION_ERROR')
+        <p>Une erreur est survenue</p>
+    @end
+
+    <div>
+        <form action="">
+            <input type="number" name="surface" value="{{inputes['surface']??''}}" placeholder="Surface">
+            <input type="number" name="budget" value="{{inputes['budget']??''}}" placeholder="Budget max">
+            <input type="number" name="rooms" value="{{inputes['rooms']??''}}" placeholder="Nombre de chambre">
+            <input type="search" name="keywords" value="{{inputes['keywords']??''}}" placeholder="Mot clé">
+            <button>Recherche</button>
+        </form>
+    </div>
+
+    <div id="cards">
+
+        @each(property in properties)
+            @!home.card({property}) 
+        @else
+            <p>empty</p>
+        @end
+
+    </div>
+
+    <div>
+
+        @if(properties.currentPage!==1) 
+
+        <a href="{{properties.getPreviousPageUrl()}}">previous</a>
+        
+        @end
+
+        @if(properties.hasMorePages) 
+
+        <a href="{{properties.getNextPageUrl()}}">next</a>
+
+        @end
+
+    </div>
+
+    @end
+
+@end

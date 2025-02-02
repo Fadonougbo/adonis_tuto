@@ -6,10 +6,12 @@
 | The routes file is used for defining the HTTP routes.
 |
 */
-
 import router from '@adonisjs/core/services/router'
 
 router.get('/','#controllers/home_controller.index').as('home')
+router.get('/listings','#controllers/listings_controller.index').as('listings')
+router.get('/listings/:slug/:property','#controllers/listings_controller.show').as('property.show').where('property',router.matchers.number()).where('slug',router.matchers.slug())
+
 
 
 router.group(()=> {

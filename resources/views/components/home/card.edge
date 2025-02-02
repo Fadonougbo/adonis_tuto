@@ -1,0 +1,12 @@
+@let({title,surface,price,city,id}=property)
+<ul class="card" >
+    <li>
+        <a href="{{route('property.show',{property:id,slug:property.getSlug()})}}">
+            {{title}}
+        </a>
+    </li>
+    <li>{{surface}}m<sup>2</sup>-{{city}}</li>
+    <li>
+        <strong>{{price}}$</strong>
+    </li>
+</ul>
