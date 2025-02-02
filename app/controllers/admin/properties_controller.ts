@@ -1,6 +1,8 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import { dd } from '@adonisjs/core/services/dumper';
 import { bind } from '@adonisjs/route-model-binding';
+import vine from '@vinejs/vine';
+import Option from '#models/admin/option';
 import Property from '#models/admin/property';
 import { createPropertyFormValidator, updatePropertyFormValidator } from '#validators/admin/property_form';
 
@@ -14,9 +16,8 @@ export default class PropertiesController {
     const currentPage=request.input("page",1)
 
     const url=request.url()
-
     const properties= ( (await Property.query().orderBy("id","desc").paginate(currentPage,12)).baseUrl(url) )
-
+    
     return view.render("components/admin/index",{properties})
   }
 
@@ -26,7 +27,11 @@ export default class PropertiesController {
   async create({view}: HttpContext) {
 
     const property=new Property()
-    return view.render("components/admin/create",{property});
+    const options=(await Option.query().select(['id','name']))
+
+    const propertyOptions: never[]=[]
+
+    return view.render("components/admin/create",{property,options,propertyOptions});
   }
 
   /**
@@ -34,10 +39,16 @@ export default class PropertiesController {
    */
   async store({ request,response,session }: HttpContext) {
 
-    
+ 
     const res=await  request.validateUsing(createPropertyFormValidator)
 
-    await Property.create(res)
+    const {options,...formdata}=res
+
+    const property=await Property.create(formdata)
+
+    if(options) {
+      property.related('options').sync(options)
+    }
 
     session.flash("success","Element ajouté avec success")
 
@@ -58,7 +69,16 @@ export default class PropertiesController {
   @bind()
   async edit({ view}: HttpContext,property:Property) {
 
-    return view.render("components/admin/create",{property});
+    const options=(await Option.query().select(['id','name']))
+
+    await property.load('options',(query)=> {
+        query.select(['id'])
+    })
+
+    const propertyOptions=property.options.map((option)=>option.id)
+    
+
+    return view.render("components/admin/create",{property,options,propertyOptions});
    
     
   }
@@ -68,11 +88,23 @@ export default class PropertiesController {
    */
   @bind()
   async update({ request,session,response }: HttpContext,property:Property) {
-
-    const data=await request.validateUsing(updatePropertyFormValidator)
     
-    await property.merge({...data,is_sold:data.is_sold?true:false }).save()
+    
+    const data=await request.validateUsing(updatePropertyFormValidator)
 
+    //j'extraire options des donnees car il n'existe pas de champ options dans la BD
+    const {options,...formdata}=data
+
+    await property.merge({...formdata,is_sold:data.is_sold?true:false }).save()
+
+    //je supprime les anciennes liaisons
+    await property.related('options').sync([])
+
+    //liaison property option
+    if(options) {
+      await property.related('options').sync(options)
+    }
+    
     session.flash("success","Element modifié avec success")
 
     return response.redirect().toRoute("admin.index");

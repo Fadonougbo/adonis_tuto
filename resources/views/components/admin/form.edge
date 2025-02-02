@@ -3,14 +3,14 @@
 <div id="form_container" >
 
     <form action="{{
-        property.id?route('admin.property.update',{property:property.id}, { qs: {_method:'patch'} }):''
+        property.id?route('admin.property.update',{property:property.id}, { qs: {_method:'PATCH'} }):''
     }}" method="POST">
     
         {{csrfField()}}
 
         @error("E_VALIDATION_ERROR")
             <div id="message" >
-                <h2>Une erreur est survenu veuillez vérifier vos données</h2>
+                <h2>Une erreur est survenue veuillez vérifier vos données</h2>
             </div> 
         @end
 
@@ -46,7 +46,7 @@
 
         <div>
             <span><label for="price">Prix</label></span>
-            <input type="number" name="price" id="price" value="{{old('price',property.price)}}">
+            <input type="number" name="price" id="price" value="{{old('price',property.price)||''}}">
             @inputError("price")
             <p>
                <span> {{$messages}} </span>
@@ -56,7 +56,7 @@
 
         <div>
             <span><label for="city">Ville</label></span>
-            <input type="text" name="city" id="city" value="{{old('city',property.city)}}">
+            <input type="text" name="city" id="city" value="{{old('city',property.city)||''}}">
             @inputError("city")
             <p>
                <span> {{$messages}} </span>
@@ -66,8 +66,28 @@
 
         <div>
             <span><label for="tel">Tel</label></span>
-            <input type="tel" name="tel" id="tel" value="{{old('tel',property.tel)}}">
+            <input type="tel" name="tel" id="tel" value="{{old('tel',property.tel)||''}}">
             @inputError("tel")
+            <p>
+               <span> {{$messages}} </span>
+            </p>
+            @end
+        </div>
+
+        <div>
+          
+            <span><label for="options">Selectionnez les options</label></span>
+            
+            <select name="options[]" id="options" multiple>
+
+                @each(option in options)
+                    @let({id,name}=option)
+                    <option value="{{id}}" {{propertyOptions.includes(id)?'selected':''}} >{{name}}</option>
+                @end
+
+            </select>
+            
+            @inputError("options")
             <p>
                <span> {{$messages}} </span>
             </p>
@@ -82,7 +102,10 @@
                <span> {{$messages}} </span>
             </p>
             @end
+            
         </div>
+
+        
 
         <section id="sold_checkbox_parent" >
 

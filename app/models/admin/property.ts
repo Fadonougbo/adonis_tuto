@@ -1,5 +1,7 @@
-import { BaseModel, CamelCaseNamingStrategy, column } from "@adonisjs/lucid/orm";
+import { BaseModel, CamelCaseNamingStrategy, column, manyToMany } from "@adonisjs/lucid/orm";
+import type { ManyToMany } from "@adonisjs/lucid/types/relations";
 import type { DateTime } from "luxon";
+import Option from "./option.js";
 
 export default class Property extends BaseModel {
 
@@ -30,6 +32,9 @@ export default class Property extends BaseModel {
 
 	@column()
 	declare tel:string
+
+	@manyToMany(()=>Option)
+	declare options:ManyToMany<typeof Option>
 
 	@column.dateTime({ autoCreate: true })
 	declare createdAt: DateTime;

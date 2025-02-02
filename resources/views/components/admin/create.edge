@@ -8,10 +8,9 @@
 
     @slot("content")
     
-
         <h1 id="page_title" >{{property.id?"Update Property":"Create New Property"}} </h1>
        
-        @!admin.form({property})
+        @!admin.form({property,options,propertyOptions})
 
     @end
 

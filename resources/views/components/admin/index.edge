@@ -41,7 +41,7 @@
                         <td>{{surface}} m<sup>2</sup></td>
                         <td>{{price}}</td>
                         <td>{{city}}</td>
-                        <td>{{is_sold?'ok':'no'}}</td>
+                        <td>{{is_sold?'oui':'non'}}</td>
                         <td class="actions" >
                             <a href="{{route('admin.property.edit',{property:id})}}">Éditer</a>
                             <form action="{{ route('admin.property.destroy',{property:id},{qs:{_method:'DELETE'}} ) }}" method="POST">

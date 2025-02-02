@@ -13,9 +13,13 @@ export const createPropertyFormValidator = vine.compile(
     price:vine.number().min(3),
     city:vine.string(),
     is_sold:vine.boolean().optional(),
-    tel:vine.string()
+    tel:vine.string(),
+    options:vine.array(
+      vine.number().exists({table:'options',column:'id'})
+    ).optional()
   }).bail(true)
 )
+
 
 /**
  * Validator to validate the payload when updating
@@ -30,6 +34,9 @@ export const updatePropertyFormValidator = vine.compile(
     price:vine.number().min(3),
     city:vine.string(),
     is_sold:vine.boolean().optional(),
-    tel:vine.string()
+    tel:vine.string(),
+    options:vine.array(
+      vine.number().exists({table:'options',column:'id'})
+    ).optional()
   }).bail(true)
 )

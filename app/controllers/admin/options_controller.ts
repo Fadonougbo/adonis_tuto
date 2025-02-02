@@ -1,4 +1,5 @@
 import type { HttpContext } from '@adonisjs/core/http'
+import { dd } from '@adonisjs/core/services/dumper'
 import { bind } from '@adonisjs/route-model-binding'
 import Option from '#models/admin/option'
 import { createOptionFormValidator, updateOptionFormValidator } from '#validators/admin/option_form'
@@ -33,11 +34,11 @@ export default class OptionsController {
    */
   async store({ request,session,response }: HttpContext) {
 
-    const res=await  request.validateUsing(createOptionFormValidator)
-    
+      const res=await  request.validateUsing(createOptionFormValidator)
+
         await Option.create(res)
     
-        session.flash("success","Element ajouté avec success")
+        session.flash("success","Element ajouté avec succes")
     
        return response.redirect().toRoute("admin.option.index");
   }
