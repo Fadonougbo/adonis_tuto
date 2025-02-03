@@ -13,7 +13,7 @@
         <p>Une erreur est survenue</p>
     @end
 
-    <div>
+    <div id="form_container" >
         <form action="">
             <input type="number" name="surface" value="{{inputes['surface']??''}}" placeholder="Surface">
             <input type="number" name="budget" value="{{inputes['budget']??''}}" placeholder="Budget max">
@@ -28,7 +28,7 @@
         @each(property in properties)
             @!home.card({property}) 
         @else
-            <p>empty</p>
+            <p  id="empty" >empty</p>
         @end
 
     </div>

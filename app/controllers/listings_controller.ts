@@ -1,5 +1,6 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import { dd } from '@adonisjs/core/services/dumper';
+import { bind } from '@adonisjs/route-model-binding';
 import Property from '#models/admin/property';
 import { searchFormValidator } from '#validators/search';
 
@@ -8,7 +9,6 @@ export default class ListingsController {
    * Display a list of resource
    */
   async index({view,request}: HttpContext) {
-    
 
     const {surface,budget,keywords,rooms}=await request.validateUsing(searchFormValidator)
 
@@ -41,20 +41,26 @@ export default class ListingsController {
 
   }
 
-  /**
-   * Display form to create a new record
-   */
-  async create({}: HttpContext) {}
-
-  /**
-   * Handle form submission for the create action
-   */
-  async store({ request }: HttpContext) {}
 
   /**
    * Show individual record
    */
-  async show({ params }: HttpContext) {}
+  @bind()
+  async show({ response,view }: HttpContext,slug:string,property:Property) {
+    
+    const propertySlug=property.getSlug()
+
+    if(slug !== propertySlug) {
+      return response.redirect().toRoute('property.show',{slug:propertySlug,property:property.id})
+    }
+
+    await property.load('options',(query)=>{
+      query.select('name')
+    })
+   
+    return view.render('components/show/show',{property,options:property.options})
+
+  }
 
   /**
    * Edit individual record
