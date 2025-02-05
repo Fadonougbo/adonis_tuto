@@ -35,6 +35,11 @@ main #presentation {
         margin-bottom: 0.5rem;
     }
 
+    section div p {
+        color: crimson;
+        margin-top: 0.6rem;
+    }
+
     form {
         width: 100%;
         display: flex;
@@ -77,5 +82,45 @@ main #presentation {
         width: 60%;
         padding: 0.5rem;
         font-size: 1.2rem;
+        border-radius: 6px;
+        border: none;
+        background-color: royalblue;
+        color:aliceblue
+    }
+
+   
+}
+
+#details {
+    display: flex;
+    width:40%;
+    justify-content: space-around;
+    margin: 1rem 0;
+    span {
+        font-size: 1.7rem;
+        font-weight: 700;
+    }
+
+    ul {
+        margin-top: 0.5rem;
+    }
+}
+
+#message {
+    margin-block: 1rem;
+    text-align: center;
+
+    &.error {
+        background-color: crimson;
+        color: #e7dede;
+        padding: 0.5rem;
+        border-radius: 7px;
+    }
+
+    &.success {
+        background-color: green;
+        color: #e7dede;
+        padding: 0.5rem;
+        border-radius: 7px;
     }
 }

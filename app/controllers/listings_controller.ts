@@ -1,7 +1,11 @@
 import type { HttpContext } from '@adonisjs/core/http'
+import app from '@adonisjs/core/services/app';
 import { dd } from '@adonisjs/core/services/dumper';
+import mail from '@adonisjs/mail/services/main'
 import { bind } from '@adonisjs/route-model-binding';
+import PropertyContactNotification from '#mails/property_contact_notification';
 import Property from '#models/admin/property';
+import { propertyContactValidator } from '#validators/property_contact';
 import { searchFormValidator } from '#validators/search';
 
 export default class ListingsController {
@@ -57,15 +61,24 @@ export default class ListingsController {
     await property.load('options',(query)=>{
       query.select('name')
     })
-   
+    
     return view.render('components/show/show',{property,options:property.options})
 
   }
 
   /**
-   * Edit individual record
+   * Pour le formulaire de contact
    */
-  async edit({ params }: HttpContext) {}
+  @bind()
+  async contact({ request,response,session }: HttpContext,property:Property) {
+    const data=await request.validateUsing(propertyContactValidator)
+
+    await mail.send(new PropertyContactNotification(property,data))
+
+    session.flash('success',"L'email a bien été envoyé")
+
+    return response.redirect().back()
+  }
 
   /**
    * Handle form submission for the edit action

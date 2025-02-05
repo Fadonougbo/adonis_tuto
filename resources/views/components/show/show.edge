@@ -1,5 +1,5 @@
 
-@let({title,surface,city,tel,rooms,price}=property)
+@let({title,surface,city,tel,rooms,price,id}=property)
 
 @home.base({title}) 
 
@@ -24,33 +24,63 @@
 
         <div id="form_container" >
             <p>Interessé par ce bien ?</p>
-            <form action="">
+
+            @error("E_VALIDATION_ERROR")
+                <div id="message" class="error">
+                    <h2>Une erreur est survenue veuillez vérifier vos données</h2>
+                </div> 
+            @end
+
+            @flashMessage('success') 
+                <div id="message" class="success">
+                    <h2>{{$message}}</h2>
+                </div> 
+            @end
+
+            <form action="{{route('property.contact',{property:id})}}" method="POST">
+                {{csrfField()}}
+
                 <section class="input_container" >
                     <div>
-                        <label for="name">Nom</label>
-                        <input type="text" name="name" id="name" placeholder="Nom">
+                        <label for="firstname">Nom</label>
+                        <input type="text" name="firstname" id="firstname" placeholder="Nom">
+                        @inputError('firstname')
+                            <p>{{$messages}}</p>
+                        @end
                     </div>
                     <div>
-                        <label for="surname">Prenom(s)</label>
-                        <input type="text" name="surname" id="surname" placeholder="Prenom">
+                        <label for="lastname">Prenom(s)</label>
+                        <input type="text" name="lastname" id="lastname" placeholder="Prenom">
+                        @inputError('lastname')
+                            <p>{{$messages}}</p>
+                        @end
                     </div>
                 </section>
 
                 <section class="input_container" >
                     <div>
-                        <label for=""tel>Telephone</label>
-                        <input type="text" name="tel" id="tel" placeholder="Telephone">
+                        <label for="tel">Telephone</label>
+                        <input type="tel" name="tel" id="tel" placeholder="Telephone">
+                        @inputError('tel')
+                            <p>{{$messages}}</p>
+                        @end
                     </div>
                     <div>
                         <label for="email">Email</label>
-                        <input type="text" name="email" id="email" placeholder="Email">
+                        <input type="email" name="email" id="email" placeholder="Email">
+                        @inputError('email')
+                            <p>{{$messages}}</p>
+                        @end
                     </div>
                 </section>
 
                 <section class="input_container" >
                     <div>
-                        <label for="message">Message</label>
-                        <textarea name="message" id="message" ></textarea>
+                        <label for="message2">Message</label>
+                        <textarea name="message" id="message2" ></textarea>
+                        @inputError('message')
+                            <p>{{$messages}}</p>
+                        @end
                     </div>
                 </section>
                 <section id="button_container" >
@@ -59,13 +89,14 @@
             </form>
         </div>
 
-        <div>
+        <div id="details" >
             <section>
                 <span>Caractéristiques</span>
                 <ul>
                     <li>Surface: {{surface}}m<sup>2</sup> </li>
                     <li>Nombre de chambre: {{rooms}}</li>
                     <li>Tel: {{tel}}</li>
+                    <li>Localisation: {{city}}</li>
                 </ul>
             </section>
             <section>

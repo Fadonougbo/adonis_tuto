@@ -12,7 +12,7 @@ router.get('/','#controllers/home_controller.index').as('home')
 router.get('/listings','#controllers/listings_controller.index').as('listings')
 router.get('/listings/:slug/:property','#controllers/listings_controller.show').as('property.show').where('property',router.matchers.number()).where('slug',router.matchers.slug())
 
-
+router.post('property/contact/:property','#controllers/listings_controller.contact').as('property.contact').where('property',router.matchers.number())
 
 router.group(()=> {
     

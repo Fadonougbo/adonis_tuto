@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    Message pour le bien {{property.title}}
+
+    <a href="{{
+        route('property.show',{slug:property.getSlug(),property:property.id},{prefixUrl:'http://localhost:3333'})
+    }}">visiter le bien</a>
+
+    <p>{{data.message}}</p>
+</body>
+</html>

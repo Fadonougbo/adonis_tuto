@@ -37,7 +37,9 @@
 
                     <tr>
                         <td>{{id}}</td>
-                        <td>{{title}}</td>
+                        <td>
+                            <a href="{{route('property.show',{slug:property.getSlug(),property:id})}}">{{title}}</a>
+                        </td>
                         <td>{{surface}} m<sup>2</sup></td>
                         <td>{{price}}</td>
                         <td>{{city}}</td>
