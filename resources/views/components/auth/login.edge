@@ -1,0 +1,35 @@
+
+@home.base({title:'Login'}) 
+    
+    @slot('content')
+    <main>
+        <div>
+            
+            @error('E_INVALID_CREDENTIALS')
+            <p>{{$message}}</p>
+            @end
+            
+            <form action="" method="POST">
+                {{csrfField()}}
+                <div>
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" placeholder="email">
+                    @inputError('email')
+                        <p>{{$messages}}</p>
+                    @end
+                </div>
+                <div>
+                    <label for="password">Mot de passe</label>
+                    <input type="password" name="password" id="password" placeholder="password">
+                    @inputError('password')
+                        <p>{{$messages}}</p>
+                    @end
+                </div>
+                <div>
+                    <button type="submit" >se connecter</button>
+                </div>
+            </form>
+        </div>
+    </main>
+    @end
+@end

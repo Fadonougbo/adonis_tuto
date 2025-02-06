@@ -27,11 +27,28 @@
             <li>
                 <a href="{{route('admin.option.index')}}">Dashboard-Options</a>
             </li>
-        </ul>
-    </header>
-    
-    @if($slots.content) 
 
+            @if(auth.user) 
+                <li>
+                    <span>user:{{auth.user.fullName}}</span>
+                </li> 
+            @else
+                <li>
+                    <a href="{{route('login')}}">Login</a>
+                </li>
+            @end
+           
+        </ul>
+            @if(auth.user) 
+                <form action="{{route('logout')}}" method="POST">
+                    {{csrfField()}}
+                    <button>Deconnexion</button>
+                </form> 
+            @end
+    </header>
+   
+    @if($slots.content) 
+    
     {{{await $slots.content()}}}
 
     @end

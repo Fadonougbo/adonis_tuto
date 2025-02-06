@@ -21,7 +21,7 @@ export default class PropertyContactNotification extends BaseMail {
 	 */
 	prepare() {
 		this.message.to('admin@gmail.com');
-    this.message.htmlView('components/mail/mail',{property:this.property,data:this.data})
-    this.message.text('message text')
+		this.message.htmlView('components/mail/mail',{property:this.property,data:this.data})
+		this.message.text('message text')
 	}
 }

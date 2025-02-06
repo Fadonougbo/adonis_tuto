@@ -5,6 +5,7 @@ import mail from '@adonisjs/mail/services/main'
 import { bind } from '@adonisjs/route-model-binding';
 import PropertyContactNotification from '#mails/property_contact_notification';
 import Property from '#models/admin/property';
+import User from '#models/user';
 import { propertyContactValidator } from '#validators/property_contact';
 import { searchFormValidator } from '#validators/search';
 
@@ -13,7 +14,7 @@ export default class ListingsController {
    * Display a list of resource
    */
   async index({view,request}: HttpContext) {
-
+    
     const {surface,budget,keywords,rooms}=await request.validateUsing(searchFormValidator)
 
     const query=Property.query()
@@ -80,13 +81,5 @@ export default class ListingsController {
     return response.redirect().back()
   }
 
-  /**
-   * Handle form submission for the edit action
-   */
-  async update({ params, request }: HttpContext) {}
 
-  /**
-   * Delete record
-   */
-  async destroy({ params }: HttpContext) {}
 }

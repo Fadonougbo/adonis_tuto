@@ -12,6 +12,8 @@ a {
 header {
     background-color: gray;
     padding: 0.7rem;
+    display: flex;
+    align-items: center;
    
     ul {
         display: flex;
@@ -22,7 +24,7 @@ header {
         list-style: none;
     }
 
-    a {
+    a,span{
         color:#fff;
         padding: 0.4rem;
         background: #242323;
@@ -30,4 +32,12 @@ header {
             opacity: 0.8;
         }
     }
+
+    button {
+        padding: 0.2rem;
+        font-size: 1rem;
+        margin-inline: 0.3rem;
+        cursor: pointer;
+    }
+  
 }

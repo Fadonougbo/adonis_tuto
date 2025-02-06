@@ -7,12 +7,20 @@
 |
 */
 import router from '@adonisjs/core/services/router'
+import { middleware } from './kernel.js'
 
 router.get('/','#controllers/home_controller.index').as('home')
-router.get('/listings','#controllers/listings_controller.index').as('listings')
-router.get('/listings/:slug/:property','#controllers/listings_controller.show').as('property.show').where('property',router.matchers.number()).where('slug',router.matchers.slug())
 
 router.post('property/contact/:property','#controllers/listings_controller.contact').as('property.contact').where('property',router.matchers.number())
+
+router.group(()=> {
+
+    router.get('/','#controllers/listings_controller.index').as('listings')
+
+    router.get('/:slug/:property','#controllers/listings_controller.show').as('property.show').where('property',router.matchers.number()).where('slug',router.matchers.slug())
+
+    
+}).prefix('/listings')
 
 router.group(()=> {
     
@@ -43,4 +51,10 @@ router.group(()=> {
     router.delete("option/delete/:option","#controllers/admin/options_controller.destroy").as("option.destroy")
 
 
-}).prefix("/admin").as("admin")
+}).prefix("/admin").as("admin").use(middleware.auth())
+
+router.get('/login','#controllers/auth_controller.login').as('login').use(middleware.guest())
+
+router.post('/login','#controllers/auth_controller.doLogin')
+
+router.post('/logout','#controllers/auth_controller.logout').as('logout').use(middleware.auth())
