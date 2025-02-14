@@ -1,5 +1,4 @@
 import type { HttpContext } from '@adonisjs/core/http'
-import { dd } from '@adonisjs/core/services/dumper'
 import { bind } from '@adonisjs/route-model-binding'
 import Option from '#models/admin/option'
 import { createOptionFormValidator, updateOptionFormValidator } from '#validators/admin/option_form'
@@ -43,10 +42,6 @@ export default class OptionsController {
        return response.redirect().toRoute("admin.option.index");
   }
 
-  /**
-   * Show individual record
-   */
-  async show({ params }: HttpContext) {}
 
   /**
    * Edit individual record

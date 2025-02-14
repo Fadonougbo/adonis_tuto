@@ -1,3 +1,4 @@
+import type { HttpContext } from '@adonisjs/core/http'
 /*
 |--------------------------------------------------------------------------
 | Routes file
@@ -8,6 +9,7 @@
 */
 import router from '@adonisjs/core/services/router'
 import { middleware } from './kernel.js'
+
 
 router.get('/','#controllers/home_controller.index').as('home')
 

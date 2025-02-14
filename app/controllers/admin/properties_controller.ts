@@ -1,7 +1,5 @@
 import type { HttpContext } from '@adonisjs/core/http'
-import { dd } from '@adonisjs/core/services/dumper';
 import { bind } from '@adonisjs/route-model-binding';
-import vine from '@vinejs/vine';
 import Option from '#models/admin/option';
 import Property from '#models/admin/property';
 import { createPropertyFormValidator, updatePropertyFormValidator } from '#validators/admin/property_form';
@@ -16,6 +14,7 @@ export default class PropertiesController {
     const currentPage=request.input("page",1)
 
     const url=request.url()
+
     const properties= ( (await Property.query().orderBy("id","desc").paginate(currentPage,12)).baseUrl(url) )
     
     return view.render("components/admin/index",{properties})
@@ -56,14 +55,6 @@ export default class PropertiesController {
   }
 
   /**
-   * Show individual record
-   */
-  async show() {
-    
-   
-  }
-
-  /**
    * Edit individual record
    */
   @bind()
@@ -75,6 +66,7 @@ export default class PropertiesController {
         query.select(['id'])
     })
 
+    //Je recupere un tableau d'ID
     const propertyOptions=property.options.map((option)=>option.id)
     
 
@@ -88,7 +80,6 @@ export default class PropertiesController {
    */
   @bind()
   async update({ request,session,response }: HttpContext,property:Property) {
-    
     
     const data=await request.validateUsing(updatePropertyFormValidator)
 
@@ -123,4 +114,5 @@ export default class PropertiesController {
     return response.redirect().toRoute("admin.index");
 
   }
+
 }

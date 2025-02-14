@@ -12,7 +12,7 @@ export default class PropertyContactNotification extends BaseMail {
 		private data: Infer<typeof propertyContactValidator>,
 	) {
 		super();
-    this.from=this.data.email
+    	this.from=this.data.email
 	}
 
 	/**

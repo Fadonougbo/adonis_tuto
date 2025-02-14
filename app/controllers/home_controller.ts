@@ -1,5 +1,4 @@
 import type { HttpContext } from '@adonisjs/core/http'
-import { dd } from '@adonisjs/core/services/dumper';
 import Property from '#models/admin/property'
 
 

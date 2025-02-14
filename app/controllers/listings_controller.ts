@@ -1,11 +1,8 @@
 import type { HttpContext } from '@adonisjs/core/http'
-import app from '@adonisjs/core/services/app';
-import { dd } from '@adonisjs/core/services/dumper';
 import mail from '@adonisjs/mail/services/main'
 import { bind } from '@adonisjs/route-model-binding';
 import PropertyContactNotification from '#mails/property_contact_notification';
 import Property from '#models/admin/property';
-import User from '#models/user';
 import { propertyContactValidator } from '#validators/property_contact';
 import { searchFormValidator } from '#validators/search';
 
@@ -72,6 +69,7 @@ export default class ListingsController {
    */
   @bind()
   async contact({ request,response,session }: HttpContext,property:Property) {
+
     const data=await request.validateUsing(propertyContactValidator)
 
     await mail.send(new PropertyContactNotification(property,data))
@@ -79,6 +77,7 @@ export default class ListingsController {
     session.flash('success',"L'email a bien été envoyé")
 
     return response.redirect().back()
+    
   }
 
 

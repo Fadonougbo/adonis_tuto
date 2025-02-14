@@ -1,16 +1,11 @@
  import type { HttpContext } from '@adonisjs/core/http'
-import { dd } from '@adonisjs/core/services/dumper'
 import User from '#models/user'
 import { loginFormValidator } from '#validators/login'
 
 export default class AuthController {
 
     async login({view}:HttpContext) {
-       /*  await User.create({
-            fullName:'doe',
-            email:'doe@doe.com',
-            password:'doedoe'
-        }) */
+      
         return view.render('components/auth/login')
     }
 
