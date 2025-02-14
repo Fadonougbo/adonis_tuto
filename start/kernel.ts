@@ -11,6 +11,10 @@
 import router from '@adonisjs/core/services/router'
 import server from '@adonisjs/core/services/server'
 
+
+/* import {handler} from '../dist/server/entry.mjs' */
+
+
 /**
  * The error handler is used to convert an exception
  * to a HTTP response.
@@ -26,6 +30,7 @@ server.use([
   () => import('#middleware/container_bindings_middleware'),
   () => import('@adonisjs/static/static_middleware'),
   () => import('@adonisjs/vite/vite_middleware'),
+  () => import('#middleware/astromi_middleware')
 ])
 
 /**
