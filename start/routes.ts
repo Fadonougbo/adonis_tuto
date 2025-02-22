@@ -11,6 +11,8 @@ import router from '@adonisjs/core/services/router'
 import { middleware } from './kernel.js'
 
 
+
+
 router.get('/','#controllers/home_controller.index').as('home')
 
 router.post('property/contact/:property','#controllers/listings_controller.contact').as('property.contact').where('property',router.matchers.number())
@@ -60,3 +62,7 @@ router.get('/login','#controllers/auth_controller.login').as('login').use(middle
 router.post('/login','#controllers/auth_controller.doLogin')
 
 router.post('/logout','#controllers/auth_controller.logout').as('logout').use(middleware.auth())
+
+router.any('*',async ({response}:HttpContext)=> {
+    return response.send('not fount')
+}).use(middleware.astro())
