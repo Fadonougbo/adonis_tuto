@@ -28,7 +28,7 @@ export default class PropertiesController {
     const property=new Property()
     const options=(await Option.query().select(['id','name']))
 
-    const propertyOptions: never[]=[]
+    const propertyOptions: never[]=[]                 
 
     return view.render("components/admin/create",{property,options,propertyOptions});
   }

@@ -33,11 +33,11 @@ export default class ListingsController {
       query.whereILike('title',`%${keywords}%`)
     }
     
-    const url=request.url()
+    const url=request.url();
 
     const currentPage=request.input('page',1)
 
-    const properties=(await query.orderBy('id','desc').paginate(currentPage,20)).baseUrl(url)
+    const properties=(await query.orderBy('id','desc').paginate(currentPage,1)).baseUrl(url)
     
     return view.render('components/listing/listing',{properties,inputes:request.all()});
 
